@@ -50,6 +50,7 @@
 					// $.getJSON("http://deep-md2k.uom.memphis.edu/stats.json", function(data) {
 						$.getJSON("/home/sneupane/relief_study/data_analysis/graphs/stats.json", function(data) {
 					// http://deep-md2k.uom.memphis.edu/stats.json
+					console.log(data);
 					var current_data=data;
 
 					$('#participants').text(current_data['participants']);
