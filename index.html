@@ -224,13 +224,17 @@ $(document).ready(function () {
             // Function to scale word size based on frequency
             const scaleSize = (count) => {
                 const minSize = 10;  // Minimum word size
-                const maxSize = 50; // Maximum word size
+                const maxSize = 80; // Maximum word size
                 return minSize + (count - minCount) * (maxSize - minSize) / (maxCount - minCount);
             };
 
             // Map words to the scaled size
             let scaledWordList = wordList.map(item => [item[0], scaleSize(item[1])]);
 			console.log("Scaled Word List: ", scaledWordList);
+
+			const canvas = document.getElementById(canvasId);
+			canvas.width = window.innerWidth * 0.8;
+			canvas.height = window.innerHeight * 0.8;
             // Wait for a short delay to ensure canvas is ready
             setTimeout(() => {
                 WordCloud(document.getElementById(canvasId), {
@@ -242,7 +246,9 @@ $(document).ready(function () {
                     backgroundColor: "white",
                     rotateRatio: 0.3,
                     shuffle: true,
-                    drawOutOfBound: true
+                    drawOutOfBound: true,
+					minSize: 10,  // Minimum size for small words
+   					 maxSize: 80  
                 });
             }, 500);
         }).fail(function(jqxhr, textStatus, error) {
