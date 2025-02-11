@@ -164,16 +164,16 @@
     <div class="inner">
         <h2 style="text-align: center; font-size: 32px; font-family: 'Arial', sans-serif; color:white; font-weight: bold;">Stressors and Locations for Which Interventions Were Most Commonly Requested</h2>
         
-        <!-- Flexbox container for top and bottom display -->
-        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 50px;">
+        <!-- Flexbox container for side-by-side display -->
+        <div style="display: flex; justify-content: center; gap: 50px; flex-wrap: wrap;">
             <!-- Stressors Word Cloud -->
-            <div style="display: flex; justify-content: center; align-items: center; min-width: 400px; max-width: 500px;">
+            <div style="flex: 1; min-width: 400px; max-width: 500px;">
                 <h3 style="text-align: center; font-size: 32px; font-family: 'Arial', sans-serif; color:white; font-weight: bold;">Stressors</h3>
                 <canvas id="wordcloud-stressors" width="400" height="400"></canvas>
             </div>
 
             <!-- Locations Word Cloud -->
-            <div style="display: flex; justify-content: center; align-items: center; min-width: 400px; max-width: 500px;">
+            <div style="flex: 1; min-width: 400px; max-width: 500px;">
                 <h3 style="text-align: center; font-size: 32px; font-family: 'Arial', sans-serif; color:white; font-weight: bold;">Locations</h3>
                 <canvas id="wordcloud-locations" width="400" height="400"></canvas>
             </div>
