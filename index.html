@@ -49,10 +49,10 @@
 			$(document).ready(function () {
 				// $.getJSON("https://odin.md2k.org/app_api/stats", function(data) {
 					// $.getJSON("http://deep-md2k.uom.memphis.edu/stats.json", function(data) {
-						$.getJSON("/stats.json", function(data) {
+						$.getJSON("/stats.json", function(data1) {
 					// http://deep-md2k.uom.memphis.edu/stats.json
-					console.log(data);
-					var current_data=data;
+					console.log(data1);
+					var current_data=data1;
 
 					$('#participants').text(current_data['participants']);
 					$('#participant_days').text(current_data['participant_days']);
