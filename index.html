@@ -224,7 +224,7 @@ $(document).ready(function () {
             // Function to scale word size based on frequency
             const scaleSize = (count) => {
                 const minSize = 10;  // Minimum word size
-                const maxSize = 100; // Maximum word size
+                const maxSize = 50; // Maximum word size
                 return minSize + (count - minCount) * (maxSize - minSize) / (maxCount - minCount);
             };
 
