@@ -157,12 +157,12 @@
 
 			<!-- Word Cloud Section -->
 <!-- Include jQuery -->
-<script src="assets/js/jquery.min.js"></script>
+
 
 <!-- Word Cloud Section -->
 <section id="wordcloud-section" class="wrapper">
     <div class="inner">
-        <h2 style="text-align: center;">Commonly Reported Stressors & Locations</h2>
+        <h2 style="text-align: center;">Commonly Requested Interventions for Stressors & Locations</h2>
         
         <!-- Flexbox container for side-by-side display -->
         <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
@@ -185,42 +185,54 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.0.1/wordcloud2.min.js"></script>
 
 <script>
-   $(document).ready(function () {
+$(document).ready(function () {
     console.log("Document ready. Attempting to load word clouds...");
 
     function generateWordCloud(jsonFile, canvasId) {
         $.getJSON(jsonFile, function(data) {
             console.log("Loaded data for", canvasId, data);
 
+            // Ensure data is an array
             if (!Array.isArray(data)) {
                 console.error("Invalid JSON format for", jsonFile);
                 return;
             }
 
-            // Convert data into required format
+            // Convert JSON data into the required format
             let wordList = data.map(item => [item.word, parseInt(item.count, 10)]);
             console.log("Word list for", canvasId, wordList);
 
+            // Wait for a short delay to ensure canvas is ready
             setTimeout(() => {
                 WordCloud(document.getElementById(canvasId), {
                     list: wordList,
                     gridSize: Math.round(16 * window.innerWidth / 1024),
-                    weightFactor: 3,
+                    weightFactor: function (size) { return size * 1.5; },
                     fontFamily: 'Arial, sans-serif',
                     color: 'random-dark',
                     backgroundColor: '#ffffff',
-                    rotateRatio: 0.5
+                    rotateRatio: 0.3,
+                    shuffle: true,
+                    drawOutOfBound: false
                 });
             }, 500);
-        }).fail(function() {
-            console.error("Error loading JSON file:", jsonFile);
+        }).fail(function(jqxhr, textStatus, error) {
+            console.error("Error loading JSON file:", jsonFile, textStatus, error);
         });
     }
 
-    generateWordCloud("/stressors.json", "wordcloud-stressors");
-    generateWordCloud("/locations.json", "wordcloud-locations");
+    // Ensure the word cloud script runs only when canvas elements exist
+    if (document.getElementById("wordcloud-stressors") && document.getElementById("wordcloud-locations")) {
+        generateWordCloud("/stressors.json", "wordcloud-stressors");
+        generateWordCloud("/locations.json", "wordcloud-locations");
+    } else {
+        console.error("Canvas elements for word clouds not found.");
+    }
 });
 </script>
+
+
+
 		<!-- Three -->
 			<section id="participate" class="wrapper">
 				<div class="inner">
