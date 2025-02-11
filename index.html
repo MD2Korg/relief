@@ -191,7 +191,7 @@
             $.getJSON(jsonFile, function(data) {
                 console.log("Loaded data for", canvasId, data);
                 
-                let wordList = data.map(item => [item.word, item.count]);
+                let wordList = data.map(item => [item.word, parseInt(item.count, 10)]);
 
                 // Generate Word Cloud
                 WordCloud(document.getElementById(canvasId), {
