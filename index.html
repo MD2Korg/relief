@@ -160,22 +160,22 @@
 
 
 <!-- Word Cloud Section -->
-<section id="wordcloud-section" class="wrapper">
+<section id="wordcloud-section" class="wrapper style1 special">
     <div class="inner">
         <h2 style="text-align: center;">Commonly Requested Interventions for Stressors & Locations</h2>
         
         <!-- Flexbox container for side-by-side display -->
-        <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+        <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
             <!-- Stressors Word Cloud -->
             <div>
                 <h3 style="text-align: center;">Stressors</h3>
-                <canvas id="wordcloud-stressors" width="400" height="300"></canvas>
+                <canvas id="wordcloud-stressors" width="400" height="400"></canvas>
             </div>
 
             <!-- Locations Word Cloud -->
             <div>
                 <h3 style="text-align: center;">Locations</h3>
-                <canvas id="wordcloud-locations" width="400" height="300"></canvas>
+                <canvas id="wordcloud-locations" width="400" height="400"></canvas>
             </div>
         </div>
     </div>
@@ -223,7 +223,7 @@ $(document).ready(function () {
                     weightFactor: function (size) { return size; },
                     fontFamily: 'Arial, sans-serif',
                     color: 'random-dark',
-                    backgroundColor: "purple",
+                    backgroundColor: "white",
                     rotateRatio: 0.3,
                     shuffle: false,
                     drawOutOfBound: true
