@@ -235,7 +235,7 @@ $(document).ready(function () {
             setTimeout(() => {
                 WordCloud(document.getElementById(canvasId), {
                     list: scaledWordList,
-                    gridSize: Math.round(16 * window.innerWidth / 1024),
+                    gridSize: Math.round(32 * window.innerWidth / 1024),
                     weightFactor: function (size) { return size; },
                     fontFamily: 'Arial, sans-serif',
                     color: 'random-dark',
