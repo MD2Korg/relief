@@ -231,9 +231,9 @@ $(document).ready(function () {
             let scaledWordList = wordList.map(item => [item[0], scaleSize(item[1])]);
 			console.log("Scaled Word List: ", scaledWordList);
 
-			const canvas = document.getElementById(canvasId);
-			canvas.width = window.innerWidth * 0.8;
-			canvas.height = window.innerHeight * 0.8;
+			// const canvas = document.getElementById(canvasId);
+			// canvas.width = window.innerWidth * 0.8;
+			// canvas.height = window.innerHeight * 0.8;
             // Wait for a short delay to ensure canvas is ready
             setTimeout(() => {
                 WordCloud(document.getElementById(canvasId), {
