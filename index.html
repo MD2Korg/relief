@@ -193,10 +193,25 @@ $(document).ready(function () {
             console.log("Loaded data for", canvasId, data);
 
             // Ensure data is an array
+            const secretKey = "b'sk2r07877a5y3SMhk1L0E2qn7BIOqGb4n7LuPs68HIE='"; // This should be securely stored or retrieved
+            
+            // Decrypt the data
+            let decryptedData = CryptoJS.AES.decrypt(encryptedData, secretKey).toString(CryptoJS.enc.Utf8);
+            if (!decryptedData) {
+                console.error("Decryption failed!");
+                return;
+            }
+
+            // Parse the decrypted data
+            let data = JSON.parse(decryptedData);
+            console.log("Decrypted and parsed data for", canvasId, data);
+
+            // Ensure data is an array
             if (!Array.isArray(data)) {
                 console.error("Invalid JSON format for", jsonFile);
                 return;
             }
+
 
             // Convert JSON data into the required format
             let wordList = data.map(item => [item.word, parseInt(item.count, 10)]);
