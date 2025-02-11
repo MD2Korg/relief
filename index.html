@@ -166,104 +166,22 @@
         
         <!-- Flexbox container for side-by-side display -->
         <div style="display: flex; justify-content: center; gap: 50px; flex-wrap: wrap;">
-            <!-- Stressors Word Cloud -->
+            <!-- Stressors Image -->
             <div style="flex: 1; min-width: 400px; max-width: 500px;">
                 <h3 style="text-align: center; font-size: 32px; font-family: 'Arial', sans-serif; color:white; font-weight: bold;">Stressors</h3>
-                <canvas id="wordcloud-stressors" width="500" height="500"></canvas>
+                <img id="wordcloud-stressors" src="stressors_wordcloud.jpg" width="500" height="500" alt="Stressors Word Cloud" />
             </div>
 
-            <!-- Locations Word Cloud -->
+            <!-- Locations Image -->
             <div style="flex: 1; min-width: 400px; max-width: 500px;">
                 <h3 style="text-align: center; font-size: 32px; font-family: 'Arial', sans-serif; color:white; font-weight: bold;">Locations</h3>
-                <canvas id="wordcloud-locations" width="500" height="500"></canvas>
+                <img id="wordcloud-locations" src="locations_wordcloud.jpg" width="500" height="500" alt="Locations Word Cloud" />
             </div>
         </div>
     </div>
 </section>
 <!-- Load WordCloud Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.0.1/wordcloud2.min.js"></script>
 
-<script>
-$(document).ready(function () {
-    console.log("Document ready. Attempting to load word clouds...");
-
-    function generateWordCloud(jsonFile, canvasId) {
-        $.getJSON(jsonFile, function(data) {
-            console.log("Loaded data for", canvasId, data);
-
-            // Ensure data is an array
-            // const secretKey = "b'sk2r07877a5y3SMhk1L0E2qn7BIOqGb4n7LuPs68HIE='"; // This should be securely stored or retrieved
-            
-            // // Decrypt the data
-            // let decryptedData = CryptoJS.AES.decrypt(encryptedData, secretKey).toString(CryptoJS.enc.Utf8);
-            // if (!decryptedData) {
-            //     console.error("Decryption failed!");
-            //     return;
-            // }
-
-            // // Parse the decrypted data
-            // let data = JSON.parse(decryptedData);
-            // console.log("Decrypted and parsed data for", canvasId, data);
-
-            // Ensure data is an array
-            if (!Array.isArray(data)) {
-                console.error("Invalid JSON format for", jsonFile);
-                return;
-            }
-
-
-            // Convert JSON data into the required format
-            let wordList = data.map(item => [item.word, parseInt(item.count, 10)]);
-            console.log("Word list for", canvasId, wordList);
-			
-			let minCount = Math.min(...wordList.map(item => item[1]));
-            let maxCount = Math.max(...wordList.map(item => item[1]));
-
-            // Function to scale word size based on frequency
-            const scaleSize = (count) => {
-                const minSize = 10;  // Minimum word size
-                const maxSize = 30; // Maximum word size
-                return minSize + (count - minCount) * (maxSize - minSize) / (maxCount - minCount);
-            };
-
-            // Map words to the scaled size
-            let scaledWordList = wordList.map(item => [item[0], scaleSize(item[1])]);
-			console.log("Scaled Word List: ", scaledWordList);
-
-			// const canvas = document.getElementById(canvasId);
-			// canvas.width = window.innerWidth * 0.8;
-			// canvas.height = window.innerHeight * 0.8;
-            // Wait for a short delay to ensure canvas is ready
-            setTimeout(() => {
-                WordCloud(document.getElementById(canvasId), {
-                    list: scaledWordList,
-                    gridSize: Math.round(32 * window.innerWidth / 1024),
-                    weightFactor: function (size) { return size; },
-                    fontFamily: 'Arial, sans-serif',
-                    color: 'random-dark',
-                    backgroundColor: "white",
-                    rotateRatio: 0.3,
-                    shuffle: true,
-                    drawOutOfBound: true,
-					minSize: 10,  // Minimum size for small words
-   					 maxSize: 80  
-                });
-            }, 500);
-        }).fail(function(jqxhr, textStatus, error) {
-            console.error("Error loading JSON file:", jsonFile, textStatus, error);
-        });
-    }
-
-    // Ensure the word cloud script runs only when canvas elements exist
-    if (document.getElementById("wordcloud-stressors") && document.getElementById("wordcloud-locations")) {
-        generateWordCloud("/stressors.json", "wordcloud-stressors");
-        generateWordCloud("/locations.json", "wordcloud-locations");
-    } else {
-        console.error("Canvas elements for word clouds not found.");
-    }
-});
-</script>
 
 
 
