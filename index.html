@@ -155,41 +155,57 @@
 				</div>
 			</section>
 
-			<section id="wordcloud-section" class="wrapper">
-				<div class="inner">
-					<h2 style="text-align: center;">Commonly Reported Stressors</h2>
-					<canvas id="wordcloud" width="600" height="400"></canvas>
-				</div>
-			</section>
-			
-			<!-- Load WordCloud Library -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.0.1/wordcloud2.min.js"></script>
-			
-			<script>
-				// Example stressor words with frequency
-				var words = [
-					["Work", 80],
-					["Deadlines", 60],
-					["Exams", 50],
-					["Finances", 40],
-					["Health", 35],
-					["Sleep", 30],
-					["Relationships", 25],
-					["Traffic", 20],
-					["Meetings", 15],
-					["Emails", 10]
-				];
-			
-				// Generate Word Cloud
-				WordCloud(document.getElementById('wordcloud'), {
-					list: words,
-					gridSize: 8,
-					weightFactor: 3,
-					fontFamily: 'Arial, sans-serif',
-					color: 'random-light',
-					backgroundColor: '#ffffff'
-				});
-			</script>
+			<!-- Word Cloud Section -->
+<section id="wordcloud-section" class="wrapper">
+    <div class="inner">
+        <h2 style="text-align: center;">Commonly Reported Stressors & Locations</h2>
+        
+        <!-- Flexbox container for side-by-side display -->
+        <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+            <!-- Stressors Word Cloud -->
+            <div>
+                <h3 style="text-align: center;">Stressors</h3>
+                <canvas id="wordcloud-stressors" width="400" height="300"></canvas>
+            </div>
+
+            <!-- Locations Word Cloud -->
+            <div>
+                <h3 style="text-align: center;">Locations</h3>
+                <canvas id="wordcloud-locations" width="400" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Load WordCloud Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.0.1/wordcloud2.min.js"></script>
+
+<script>
+    // Function to fetch JSON and generate word cloud
+    function generateWordCloud(jsonFile, canvasId) {
+        fetch(jsonFile)
+            .then(response => response.json())
+            .then(data => {
+                // Convert JSON data to the format required by wordcloud2.js
+                let wordList = data.map(item => [item.word, item.count]);
+
+                // Generate Word Cloud
+                WordCloud(document.getElementById(canvasId), {
+                    list: wordList,
+                    gridSize: 8,
+                    weightFactor: 3,
+                    fontFamily: 'Arial, sans-serif',
+                    color: 'random-light',
+                    backgroundColor: '#ffffff'
+                });
+            })
+            .catch(error => console.error("Error loading JSON:", error));
+    }
+
+    // Load Stressors and Locations
+    generateWordCloud('stressors.json', 'wordcloud-stressors');
+    generateWordCloud('locations.json', 'wordcloud-locations');
+</script>
 
 		<!-- Three -->
 			<section id="participate" class="wrapper">
