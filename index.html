@@ -156,6 +156,10 @@
 			</section>
 
 			<!-- Word Cloud Section -->
+<!-- Include jQuery -->
+<script src="assets/js/jquery.min.js"></script>
+
+<!-- Word Cloud Section -->
 <section id="wordcloud-section" class="wrapper">
     <div class="inner">
         <h2 style="text-align: center;">Commonly Reported Stressors & Locations</h2>
@@ -181,12 +185,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.0.1/wordcloud2.min.js"></script>
 
 <script>
-    // Function to fetch JSON and generate word cloud
-    function generateWordCloud(jsonFile, canvasId) {
-        fetch(jsonFile)
-            .then(response => response.json())
-            .then(data => {
-                // Convert JSON data to the format required by wordcloud2.js
+    $(document).ready(function () {
+        // Function to fetch JSON and generate word cloud
+        function generateWordCloud(jsonFile, canvasId) {
+            $.getJSON(jsonFile, function(data) {
+                console.log("Loaded data for", canvasId, data);
+                
                 let wordList = data.map(item => [item.word, item.count]);
 
                 // Generate Word Cloud
@@ -198,15 +202,16 @@
                     color: 'random-light',
                     backgroundColor: '#ffffff'
                 });
-            })
-            .catch(error => console.error("Error loading JSON:", error));
-    }
+            }).fail(function() {
+                console.error("Error loading JSON file:", jsonFile);
+            });
+        }
 
-    // Load Stressors and Locations
-    generateWordCloud('stressors.json', 'wordcloud-stressors');
-    generateWordCloud('locations.json', 'wordcloud-locations');
+        // Load Stressors and Locations from JSON
+        generateWordCloud("/stressors.json", "wordcloud-stressors");
+        generateWordCloud("/locations.json", "wordcloud-locations");
+    });
 </script>
-
 		<!-- Three -->
 			<section id="participate" class="wrapper">
 				<div class="inner">
