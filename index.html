@@ -230,7 +230,7 @@ $(document).ready(function () {
 
             // Map words to the scaled size
             let scaledWordList = wordList.map(item => [item[0], scaleSize(item[1])]);
-
+			console.log("Scaled Word List: ", scaledWordList);
             // Wait for a short delay to ensure canvas is ready
             setTimeout(() => {
                 WordCloud(document.getElementById(canvasId), {
@@ -241,7 +241,7 @@ $(document).ready(function () {
                     color: 'random-dark',
                     backgroundColor: "white",
                     rotateRatio: 0.3,
-                    shuffle: false,
+                    shuffle: true,
                     drawOutOfBound: true
                 });
             }, 500);
