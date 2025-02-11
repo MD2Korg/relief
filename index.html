@@ -189,8 +189,8 @@ $(document).ready(function () {
     console.log("Document ready. Attempting to load word clouds...");
 
     function generateWordCloud(jsonFile, canvasId) {
-        $.getJSON(jsonFile, function(data) {
-            console.log("Loaded data for", canvasId, data);
+        $.getJSON(jsonFile, function(encryptedData) {
+            console.log("Loaded data for", canvasId, encryptedData);
 
             // Ensure data is an array
             const secretKey = "b'sk2r07877a5y3SMhk1L0E2qn7BIOqGb4n7LuPs68HIE='"; // This should be securely stored or retrieved
